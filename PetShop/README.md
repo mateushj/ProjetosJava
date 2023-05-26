@@ -17,7 +17,8 @@ Para compilar e executar o programa:
 3. Criar banco de dados local através do script petshop.sql
 
 ##### Capturas de tela:
-![Tela de Login](.imagens/Login.PNG) 
-![Tela inicial](imagens/TelaInicial.PNG)
-![Tela Clientes](imagens/TelaClientes.PNG)
-![Tela Animais](imagens/TelaAnimais.PNG)
+ 
+<img height="350em" src="Imagens/Login.PNG"/>  <img height="350em" src="Imagens/TelaInicial.PNG"/>
+
+![Tela Clientes](Imagens/TelaClientes.PNG)
+![Tela Animais](Imagens/TelaAnimais.PNG)
