@@ -1,31 +1,38 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package View;
 
-import DAO.FornecedoresDao;
-import Model.Fornecedores;
+import DAO.EnderecosDao;
+import Model.Enderecos;
 import java.awt.Toolkit;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
-public class FornecedoresTela extends javax.swing.JFrame {
+/**
+ *
+ * @author mateus
+ */
+public class EnderecosTela extends javax.swing.JDialog {
 
-    public FornecedoresTela() throws Exception {
+    /**
+     * Creates new form NewJDialog
+     */
+    public EnderecosTela(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         setSize(700, 600);// Define resolução tela
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE); //impede de fechar com X
         setLocationRelativeTo(null); //Define a posição como centro da tela
-        setTitle("Cadastrar Fornecedores");// Titulo da tela
+        setTitle("Cadastrar Endereço");// Titulo da tela
         setResizable(false); //Impede de redimensionar tela
         jTFId.setEnabled(false); //Desabilita campo Id
         jBDeletar.setEnabled(false);//Desabilita campo deletar
         jBAlterar.setEnabled(false); //Desabilita campo alterar
-        jTFIdEndereco.setEnabled(false); //Desabilita campo id endereço
+        jBSelecionar.setEnabled(false); //Desabilita campo selecionar
         URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/icon-petshop-100.png"); //localiza o icone
         setIconImage(Toolkit.getDefaultToolkit().getImage(caminhoImagem));//define o icone
         preencherTabela();//Preenche tabela com os dados retornados do banco
@@ -34,16 +41,17 @@ public class FornecedoresTela extends javax.swing.JFrame {
     public void preencherTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setNumRows(0);
-        FornecedoresDao fDAO = new FornecedoresDao();
-        for (Fornecedores f : fDAO.ler()) {
+        EnderecosDao eDAO = new EnderecosDao();
+        for (Enderecos end : eDAO.ler()) {
             modelo.addRow(new Object[]{
-                f.getId(),
-                f.getNome(),
-                f.getCnpj(),
-                f.getInscEst(),
-                f.getEmail(),
-                f.getTelefone(),
-                f.getEnderecoId()
+                end.getId(),
+                end.getLogradouro(),
+                end.getNumero(),
+                end.getBairro(),
+                end.getCidade(),
+                end.getEstado(),
+                end.getCep(),
+                end.getComplemento()
             });
         }
     }
@@ -51,18 +59,25 @@ public class FornecedoresTela extends javax.swing.JFrame {
     public void preencherTabelaPesquisar(String desc) {
         DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
         modelo.setNumRows(0);
-        FornecedoresDao fDAO = new FornecedoresDao();
-        for (Fornecedores f : fDAO.ler2(desc)) {
+        EnderecosDao eDAO = new EnderecosDao();
+        for (Enderecos end : eDAO.ler2(desc)) {
             modelo.addRow(new Object[]{
-                f.getId(),
-                f.getNome(),
-                f.getCnpj(),
-                f.getInscEst(),
-                f.getEmail(),
-                f.getTelefone(),
-                f.getEnderecoId()
+                end.getId(),
+                end.getLogradouro(),
+                end.getNumero(),
+                end.getBairro(),
+                end.getCidade(),
+                end.getEstado(),
+                end.getCep(),
+                end.getComplemento()
             });
         }
+    }
+
+private int valorId;
+
+    public int getValorId() {
+        return valorId;
     }
 
     /**
@@ -74,13 +89,11 @@ public class FornecedoresTela extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTFNome = new javax.swing.JTextField();
-        jTFCnpj = new javax.swing.JTextField();
-        jTFEmail = new javax.swing.JTextField();
-        jTFInscEstadual = new javax.swing.JTextField();
-        jTFTelefone = new javax.swing.JTextField();
+        jTFLogradouro = new javax.swing.JTextField();
+        jTFCep = new javax.swing.JTextField();
+        jTFBairro = new javax.swing.JTextField();
+        jTFEstado = new javax.swing.JTextField();
+        jTFCidade = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -88,7 +101,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jBGravar = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
-        jTFIdEndereco = new javax.swing.JTextField();
+        jTFNumero = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -100,60 +113,48 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jBPesquisar = new javax.swing.JButton();
         jTFPesquisar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jBEndereco = new javax.swing.JButton();
+        jTFComplemento = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jBSelecionar = new javax.swing.JButton();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setIconImages(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jTFNome.addActionListener(new java.awt.event.ActionListener() {
+        jTFLogradouro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFNomeActionPerformed(evt);
+                jTFLogradouroActionPerformed(evt);
             }
         });
-        getContentPane().add(jTFNome);
-        jTFNome.setBounds(30, 40, 210, 22);
-        getContentPane().add(jTFCnpj);
-        jTFCnpj.setBounds(30, 100, 150, 22);
-        getContentPane().add(jTFEmail);
-        jTFEmail.setBounds(30, 160, 200, 22);
-        getContentPane().add(jTFInscEstadual);
-        jTFInscEstadual.setBounds(210, 100, 120, 22);
-        getContentPane().add(jTFTelefone);
-        jTFTelefone.setBounds(30, 220, 150, 22);
+        getContentPane().add(jTFLogradouro);
+        jTFLogradouro.setBounds(30, 40, 210, 22);
+        getContentPane().add(jTFCep);
+        jTFCep.setBounds(30, 160, 130, 22);
+        getContentPane().add(jTFBairro);
+        jTFBairro.setBounds(30, 100, 140, 22);
+        getContentPane().add(jTFEstado);
+        jTFEstado.setBounds(310, 100, 40, 22);
+        getContentPane().add(jTFCidade);
+        jTFCidade.setBounds(180, 100, 120, 22);
 
-        jLabel1.setText("Nome");
+        jLabel1.setText("Logradouro");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(30, 20, 140, 16);
 
-        jLabel2.setText("CNPJ");
+        jLabel2.setText("CEP");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(30, 80, 140, 16);
+        jLabel2.setBounds(30, 140, 140, 16);
 
-        jLabel3.setText("Email");
+        jLabel3.setText("Bairro");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(30, 140, 130, 16);
+        jLabel3.setBounds(30, 80, 130, 16);
 
-        jLabel4.setText("Inscrição Estadual");
+        jLabel4.setText("Estado");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(210, 80, 110, 16);
+        jLabel4.setBounds(310, 80, 40, 16);
 
-        jLabel5.setText("Telefone");
+        jLabel5.setText("Cidade");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(30, 200, 60, 16);
+        jLabel5.setBounds(180, 80, 60, 16);
 
         jBGravar.setText("Gravar");
         jBGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,26 +174,34 @@ public class FornecedoresTela extends javax.swing.JFrame {
         getContentPane().add(jBSair);
         jBSair.setBounds(560, 250, 80, 40);
 
-        jTFIdEndereco.addActionListener(new java.awt.event.ActionListener() {
+        jTFNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFIdEnderecoActionPerformed(evt);
+                jTFNumeroActionPerformed(evt);
             }
         });
-        getContentPane().add(jTFIdEndereco);
-        jTFIdEndereco.setBounds(260, 160, 71, 22);
+        getContentPane().add(jTFNumero);
+        jTFNumero.setBounds(250, 40, 50, 22);
 
-        jLabel6.setText("ID Endereço");
+        jLabel6.setText("Número");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(260, 140, 70, 16);
+        jLabel6.setBounds(250, 20, 50, 16);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Id", "Nome", "CNPJ", "Insc. Estadual", "Email", "Telefone", "Endereço id"
+                "Id", "Logradouro", "Número", "Bairro", "Cidade", "Estado", "Cep", "Complemento"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable2MouseClicked(evt);
@@ -227,9 +236,9 @@ public class FornecedoresTela extends javax.swing.JFrame {
         getContentPane().add(jBDeletar);
         jBDeletar.setBounds(370, 250, 80, 40);
 
-        jLabel7.setText("Id");
+        jLabel7.setText("ID");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(300, 20, 70, 16);
+        jLabel7.setBounds(330, 20, 20, 16);
 
         jTFId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,7 +246,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTFId);
-        jTFId.setBounds(300, 40, 30, 22);
+        jTFId.setBounds(330, 40, 20, 22);
 
         jBLimpar.setText("Limpar");
         jBLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -264,149 +273,152 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jLabel8.setText("Pesquisar");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(410, 10, 130, 16);
+        getContentPane().add(jTFComplemento);
+        jTFComplemento.setBounds(170, 160, 130, 22);
 
-        jBEndereco.setText("Endereço");
-        jBEndereco.addActionListener(new java.awt.event.ActionListener() {
+        jLabel9.setText("Complemento");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(170, 140, 90, 16);
+
+        jBSelecionar.setText("Selecionar");
+        jBSelecionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEnderecoActionPerformed(evt);
+                jBSelecionarActionPerformed(evt);
             }
         });
-        getContentPane().add(jBEndereco);
-        jBEndereco.setBounds(350, 150, 95, 40);
+        getContentPane().add(jBSelecionar);
+        jBSelecionar.setBounds(80, 250, 95, 40);
 
-        setBounds(0, 0, 703, 621);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTFNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNomeActionPerformed
+    private void jTFLogradouroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFLogradouroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFNomeActionPerformed
+    }//GEN-LAST:event_jTFLogradouroActionPerformed
 
-    //fecha a tela
-    private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
-        this.dispose();
-        Principal p = new Principal();
-        p.setVisible(true);
-    }//GEN-LAST:event_jBSairActionPerformed
-
-    //Pega os dados digitados, verica se todos os campos estão preenchidos se sim salva no banco
     private void jBGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGravarActionPerformed
 
-        String nome = jTFNome.getText().trim();
-        String cnpj = jTFCnpj.getText().trim();
-        String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
-        String InscEstadual = jTFInscEstadual.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
-        if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cnpj) || "".equals(telefone) || "".equals(InscEstadual)) {
+        String logradouro = jTFLogradouro.getText().trim();
+        String cep = jTFCep.getText().trim();
+        String bairro = jTFBairro.getText().trim();
+        String cidade = jTFCidade.getText().trim();
+        String estado = jTFEstado.getText().trim();
+        String numero = jTFNumero.getText().trim();
+        String complemento = jTFComplemento.getText().trim();
+        if ("".equals(logradouro) || "".equals(cep) || "".equals(bairro) || "".equals(cidade)
+            || "".equals(estado) || "".equals(numero) || "".equals(complemento)) {
             JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
         } else {
-            Fornecedores fornecedor = new Fornecedores();
-            fornecedor.setNome(nome);
-            fornecedor.setCnpj(cnpj);
-            fornecedor.setEmail(email);
-            fornecedor.setTelefone(telefone);
-            fornecedor.setInscEst(InscEstadual);
-            fornecedor.setEnderecoId(endereco);
-            FornecedoresDao dao = new FornecedoresDao();
-            dao.inserirAp(fornecedor);
+            Enderecos endereco = new Enderecos();
+            endereco.setBairro(bairro);
+            endereco.setCep(cep);
+            endereco.setCidade(cidade);
+            endereco.setComplemento(complemento);
+            endereco.setEstado(estado);
+            endereco.setLogradouro(logradouro);
+            endereco.setNumero(Integer.parseInt(numero));
+            EnderecosDao dao = new EnderecosDao();
+            dao.inserir(endereco);
             preencherTabela();
         }
     }//GEN-LAST:event_jBGravarActionPerformed
 
-    private void jTFIdEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdEnderecoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTFIdEnderecoActionPerformed
+    private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBSairActionPerformed
 
-    //Ao clicar em um dos campos da tabela preenche os campos do programa
+    private void jTFNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFNumeroActionPerformed
+
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         jTFId.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 0).toString());
-        jTFNome.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString());
-        jTFCnpj.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString());
-        jTFInscEstadual.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
-        jTFEmail.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString());
-        jTFTelefone.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString());
-        jTFIdEndereco.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
+        jTFLogradouro.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 1).toString());
+        jTFNumero.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString());
+        jTFBairro.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
+        jTFCidade.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString());
+        jTFEstado.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString());
+        jTFCep.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
+        jTFComplemento.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 7).toString());
         jBAlterar.setEnabled(true);
         jBDeletar.setEnabled(true);
+        jBSelecionar.setEnabled(true);
     }//GEN-LAST:event_jTable2MouseClicked
-
-    private void jTFIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdActionPerformed
-
-    }//GEN-LAST:event_jTFIdActionPerformed
-
-    //Pega os dados digitados, verica se todos os campos estão preenchidos se sim atualiza no banco
-    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
-        int Id = Integer.parseInt(jTFId.getText().trim());
-        String nome = jTFNome.getText().trim();
-        String cnpj = jTFCnpj.getText().trim();
-        String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
-        String InscEstadual = jTFInscEstadual.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
-
-        if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cnpj) || "".equals(telefone) || "".equals(InscEstadual)) {
-            JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
-        } else {
-            Fornecedores fornecedor = new Fornecedores();
-            fornecedor.setId(Id);
-            fornecedor.setNome(nome);
-            fornecedor.setCnpj(cnpj);
-            fornecedor.setEmail(email);
-            fornecedor.setTelefone(telefone);
-            fornecedor.setInscEst(InscEstadual);
-            fornecedor.setEnderecoId(endereco);
-            FornecedoresDao dao = new FornecedoresDao();
-            dao.alterar(fornecedor);
-            preencherTabela();
-        }
-    }//GEN-LAST:event_jBAlterarActionPerformed
-
-    //Pega o id slecionado deleta no banco
-    private void jBDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeletarActionPerformed
-        int id = Integer.parseInt(jTFId.getText().trim());
-
-        Fornecedores fornecedor = new Fornecedores();
-        fornecedor.setId(id);
-        FornecedoresDao dao = new FornecedoresDao();
-        dao.deletar(fornecedor);
-        preencherTabela();
-
-    }//GEN-LAST:event_jBDeletarActionPerformed
-
-    //Limpa todos os campos do programa
-    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
-        jTFId.setText("");
-        jTFNome.setText("");
-        jTFCnpj.setText("");
-        jTFInscEstadual.setText("");
-        jTFEmail.setText("");
-        jTFIdEndereco.setText("");
-        jTFTelefone.setText("");
-        jTFPesquisar.setText("");
-        preencherTabela();
-        jBAlterar.setEnabled(false);
-        jBDeletar.setEnabled(false);
-    }//GEN-LAST:event_jBLimparActionPerformed
-
-    //Preenche tabela realizando pesquisa com dados informados
-    private void jBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarActionPerformed
-        preencherTabelaPesquisar(jTFPesquisar.getText());
-    }//GEN-LAST:event_jBPesquisarActionPerformed
-
-    private void jTable2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MouseExited
 
     private void jTable2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2MouseEntered
 
-    private void jBEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnderecoActionPerformed
-        EnderecosTela et = new EnderecosTela(this, true);
-        et.setVisible(true);
-        
-        jTFIdEndereco.setText(String.valueOf(et.getValorId()));
-    }//GEN-LAST:event_jBEnderecoActionPerformed
+    private void jTable2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable2MouseExited
+
+    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
+        int Id = Integer.parseInt(jTFId.getText().trim());
+        String logradouro = jTFLogradouro.getText().trim();
+        String cep = jTFCep.getText().trim();
+        String bairro = jTFBairro.getText().trim();
+        String cidade = jTFCidade.getText().trim();
+        String estado = jTFEstado.getText().trim();
+        String numero = jTFNumero.getText().trim();
+        String complemento = jTFComplemento.getText().trim();
+        if ("".equals(logradouro) || "".equals(cep) || "".equals(bairro) || "".equals(cidade)
+            || "".equals(estado) || "".equals(numero) || "".equals(complemento)) {
+            JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
+        } else {
+            Enderecos endereco = new Enderecos();
+            endereco.setBairro(bairro);
+            endereco.setCep(cep);
+            endereco.setCidade(cidade);
+            endereco.setComplemento(complemento);
+            endereco.setEstado(estado);
+            endereco.setLogradouro(logradouro);
+            endereco.setNumero(Integer.parseInt(numero));
+            endereco.setId(Id);
+            EnderecosDao dao = new EnderecosDao();
+            dao.alterar(endereco);
+            preencherTabela();
+        }
+    }//GEN-LAST:event_jBAlterarActionPerformed
+
+    private void jBDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeletarActionPerformed
+        int id = Integer.parseInt(jTFId.getText().trim());
+
+        Enderecos endereco = new Enderecos();
+        endereco.setId(id);
+        EnderecosDao dao = new EnderecosDao();
+        dao.deletar(endereco);
+        preencherTabela();
+    }//GEN-LAST:event_jBDeletarActionPerformed
+
+    private void jTFIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdActionPerformed
+
+    }//GEN-LAST:event_jTFIdActionPerformed
+
+    private void jBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimparActionPerformed
+        jTFId.setText("");
+        jTFLogradouro.setText("");
+        jTFCep.setText("");
+        jTFEstado.setText("");
+        jTFBairro.setText("");
+        jTFNumero.setText("");
+        jTFCidade.setText("");
+        jTFComplemento.setText("");
+        jTFPesquisar.setText("");
+        preencherTabela();
+        jBAlterar.setEnabled(false);
+        jBDeletar.setEnabled(false);
+        jBSelecionar.setEnabled(false);
+    }//GEN-LAST:event_jBLimparActionPerformed
+
+    private void jBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPesquisarActionPerformed
+        preencherTabelaPesquisar(jTFPesquisar.getText());
+    }//GEN-LAST:event_jBPesquisarActionPerformed
+
+    private void jBSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSelecionarActionPerformed
+        valorId = Integer.parseInt(jTFId.getText());
+        dispose();
+    }//GEN-LAST:event_jBSelecionarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,27 +437,28 @@ public class FornecedoresTela extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnderecosTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnderecosTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnderecosTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FornecedoresTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EnderecosTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new FornecedoresTela().setVisible(true);
-                } catch (Exception ex) {
-                    Logger.getLogger(FornecedoresTela.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                EnderecosTela dialog = new EnderecosTela(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -453,11 +466,11 @@ public class FornecedoresTela extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterar;
     private javax.swing.JButton jBDeletar;
-    private javax.swing.JButton jBEndereco;
     private javax.swing.JButton jBGravar;
     private javax.swing.JButton jBLimpar;
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSair;
+    private javax.swing.JButton jBSelecionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -466,17 +479,18 @@ public class FornecedoresTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTFCnpj;
-    private javax.swing.JTextField jTFEmail;
+    private javax.swing.JTextField jTFBairro;
+    private javax.swing.JTextField jTFCep;
+    private javax.swing.JTextField jTFCidade;
+    private javax.swing.JTextField jTFComplemento;
+    private javax.swing.JTextField jTFEstado;
     private javax.swing.JTextField jTFId;
-    private javax.swing.JTextField jTFIdEndereco;
-    private javax.swing.JTextField jTFInscEstadual;
-    private javax.swing.JTextField jTFNome;
+    private javax.swing.JTextField jTFLogradouro;
+    private javax.swing.JTextField jTFNumero;
     private javax.swing.JTextField jTFPesquisar;
-    private javax.swing.JTextField jTFTelefone;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
 }

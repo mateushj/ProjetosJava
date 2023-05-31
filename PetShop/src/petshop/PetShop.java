@@ -5,6 +5,7 @@
 package petshop;
 
 import View.Login;
+import View.Principal;
 import java.text.ParseException;
 import java.sql.SQLException;
 
@@ -16,12 +17,14 @@ public class PetShop {
 
     /**
      * @param args the command line arguments
+     * @throws java.sql.SQLException
+     * @throws java.text.ParseException
      */
     public static void main(String[] args) throws SQLException, ParseException {
-//        Principal p = new Principal();
-//        p.setVisible(true);
-        Login l = new Login();
-        l.setVisible(true);
+        Principal p = new Principal();
+        p.setVisible(true);
+//        Login l = new Login();
+//        l.setVisible(true);
     }
     
 }

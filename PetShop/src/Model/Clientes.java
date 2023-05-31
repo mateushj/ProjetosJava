@@ -9,8 +9,6 @@ public class Clientes {
     private int id;
     private String nome;
     private String cpf;
-    private String cep;
-    private String numero;
     private String email;
     private String telefone;
     private String dataNascimento;
@@ -46,22 +44,6 @@ public class Clientes {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     public String getEmail() {

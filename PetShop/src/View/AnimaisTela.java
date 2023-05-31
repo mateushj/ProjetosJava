@@ -68,7 +68,7 @@ public class AnimaisTela extends javax.swing.JFrame {
         }
     }
 
-    public void preencherTabelaPesquisar(String desc) {
+    private void preencherTabelaPesquisar(String desc) {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
         AnimaisDao aDAO = new AnimaisDao();
@@ -101,6 +101,9 @@ public class AnimaisTela extends javax.swing.JFrame {
         jCBIdTutor.setModel(modeloListId);
     }
 
+    
+
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -129,6 +132,7 @@ public class AnimaisTela extends javax.swing.JFrame {
         jCBNomeTutor = new javax.swing.JComboBox<>();
         jCBIdTutor = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        jLNomeTutor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -277,6 +281,8 @@ public class AnimaisTela extends javax.swing.JFrame {
         jLabel8.setText("Nome Tutor");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(240, 100, 170, 16);
+        getContentPane().add(jLNomeTutor);
+        jLNomeTutor.setBounds(500, 120, 150, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -311,11 +317,14 @@ public class AnimaisTela extends javax.swing.JFrame {
         jBDeletar.setEnabled(false);
     }//GEN-LAST:event_jBLimparActionPerformed
 
+    
     //fecha a tela
     private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
         this.dispose();
+        if("Cadastrar Animais".equals(getTitle())){
         Principal p = new Principal();
         p.setVisible(true);
+        }
     }//GEN-LAST:event_jBSairActionPerformed
 
     //Pega os dados digitados, verica se todos os campos estão preenchidos se sim salva no banco
@@ -400,6 +409,10 @@ public class AnimaisTela extends javax.swing.JFrame {
         preencherTabela();
     }//GEN-LAST:event_jBDeletarActionPerformed
 
+    public void setjCBIdTutor(int jCBIdTutor) {
+        this.jCBIdTutor.setSelectedItem(jCBIdTutor);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -445,6 +458,7 @@ public class AnimaisTela extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBIdTutor;
     private javax.swing.JComboBox<String> jCBNomeTutor;
     private javax.swing.JComboBox<String> jCBSexo;
+    private javax.swing.JLabel jLNomeTutor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
