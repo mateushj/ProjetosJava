@@ -35,7 +35,7 @@ public class UsuariosTela extends javax.swing.JFrame {
         preencherTabela();//Preenche tabela com os dados retornados do banco
     }
 
-    private void preencherTabela() {
+    public void preencherTabela() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         modelo.setNumRows(0);
         UsuariosDao uDAO = new UsuariosDao();
@@ -110,15 +110,7 @@ public class UsuariosTela extends javax.swing.JFrame {
             new String [] {
                 "id", "Usuario", "Perfil"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);

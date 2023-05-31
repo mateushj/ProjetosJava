@@ -10,7 +10,6 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 public class Principal extends javax.swing.JFrame {
 
@@ -28,16 +27,12 @@ public class Principal extends javax.swing.JFrame {
 
     //Redimedisiona e localiza define a imagem de imagem de fundo 
     public void imagemFundo() {
-        try {
-            URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/petshop-bemvindo-logo.png");
-            ImageIcon imagem = new ImageIcon(caminhoImagem);
-            Image img = imagem.getImage();
-            Image imgScale = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
-            ImageIcon imagemEscalada = new ImageIcon(imgScale);
-            label.setIcon(imagemEscalada);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao localizar imagem de fundo " + e.getMessage());
-        }
+        URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/petshop-bemvindo-logo.png");
+        ImageIcon imagem = new ImageIcon(caminhoImagem);
+        Image img = imagem.getImage();
+        Image imgScale = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon imagemEscalada = new ImageIcon(imgScale);
+        label.setIcon(imagemEscalada);
     }
 
     //Bloqueia os campos informados
@@ -83,7 +78,7 @@ public class Principal extends javax.swing.JFrame {
 
         label.setText("jLabel1");
         getContentPane().add(label);
-        label.setBounds(0, -70, 385, 385);
+        label.setBounds(0, -80, 385, 385);
 
         jMenuCadastros.setText("Cadastros");
         jMenuCadastros.addActionListener(new java.awt.event.ActionListener() {

@@ -25,7 +25,6 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jTFId.setEnabled(false); //Desabilita campo Id
         jBDeletar.setEnabled(false);//Desabilita campo deletar
         jBAlterar.setEnabled(false); //Desabilita campo alterar
-        jTFIdEndereco.setEnabled(false); //Desabilita campo id endereço
         URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/icon-petshop-100.png"); //localiza o icone
         setIconImage(Toolkit.getDefaultToolkit().getImage(caminhoImagem));//define o icone
         preencherTabela();//Preenche tabela com os dados retornados do banco
@@ -88,7 +87,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jBGravar = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
-        jTFIdEndereco = new javax.swing.JTextField();
+        jTFEndereco = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -173,13 +172,13 @@ public class FornecedoresTela extends javax.swing.JFrame {
         getContentPane().add(jBSair);
         jBSair.setBounds(560, 250, 80, 40);
 
-        jTFIdEndereco.addActionListener(new java.awt.event.ActionListener() {
+        jTFEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFIdEnderecoActionPerformed(evt);
+                jTFEnderecoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTFIdEndereco);
-        jTFIdEndereco.setBounds(260, 160, 71, 22);
+        getContentPane().add(jTFEndereco);
+        jTFEndereco.setBounds(260, 160, 71, 22);
 
         jLabel6.setText("ID Endereço");
         getContentPane().add(jLabel6);
@@ -266,11 +265,6 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jLabel8.setBounds(410, 10, 130, 16);
 
         jBEndereco.setText("Endereço");
-        jBEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEnderecoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jBEndereco);
         jBEndereco.setBounds(350, 150, 95, 40);
 
@@ -296,7 +290,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
         String email = jTFEmail.getText().trim();
         String telefone = jTFTelefone.getText().trim();
         String InscEstadual = jTFInscEstadual.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
+        String endereco = jTFEndereco.getText().trim();
         if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cnpj) || "".equals(telefone) || "".equals(InscEstadual)) {
             JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
         } else {
@@ -313,9 +307,9 @@ public class FornecedoresTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBGravarActionPerformed
 
-    private void jTFIdEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdEnderecoActionPerformed
+    private void jTFEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEnderecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFIdEnderecoActionPerformed
+    }//GEN-LAST:event_jTFEnderecoActionPerformed
 
     //Ao clicar em um dos campos da tabela preenche os campos do programa
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
@@ -325,7 +319,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jTFInscEstadual.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
         jTFEmail.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString());
         jTFTelefone.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString());
-        jTFIdEndereco.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
+        jTFEndereco.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
         jBAlterar.setEnabled(true);
         jBDeletar.setEnabled(true);
     }//GEN-LAST:event_jTable2MouseClicked
@@ -342,7 +336,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
         String email = jTFEmail.getText().trim();
         String telefone = jTFTelefone.getText().trim();
         String InscEstadual = jTFInscEstadual.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
+        String endereco = jTFEndereco.getText().trim();
 
         if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cnpj) || "".equals(telefone) || "".equals(InscEstadual)) {
             JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
@@ -380,7 +374,7 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jTFCnpj.setText("");
         jTFInscEstadual.setText("");
         jTFEmail.setText("");
-        jTFIdEndereco.setText("");
+        jTFEndereco.setText("");
         jTFTelefone.setText("");
         jTFPesquisar.setText("");
         preencherTabela();
@@ -400,13 +394,6 @@ public class FornecedoresTela extends javax.swing.JFrame {
     private void jTable2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2MouseEntered
-
-    private void jBEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnderecoActionPerformed
-        EnderecosTela et = new EnderecosTela(this, true);
-        et.setVisible(true);
-        
-        jTFIdEndereco.setText(String.valueOf(et.getValorId()));
-    }//GEN-LAST:event_jBEnderecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -470,8 +457,8 @@ public class FornecedoresTela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFCnpj;
     private javax.swing.JTextField jTFEmail;
+    private javax.swing.JTextField jTFEndereco;
     private javax.swing.JTextField jTFId;
-    private javax.swing.JTextField jTFIdEndereco;
     private javax.swing.JTextField jTFInscEstadual;
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFPesquisar;

@@ -22,7 +22,6 @@ public class ClientesTela extends javax.swing.JFrame {
     /**
      * Creates new form Clientes
      */
-    
     public ClientesTela() throws Exception {
         initComponents();
         setSize(700, 600);// Define resolução tela
@@ -33,8 +32,6 @@ public class ClientesTela extends javax.swing.JFrame {
         jTFIdCliente.setEnabled(false); //Desabilita campo Id
         jBDeletar.setEnabled(false);//Desabilita campo deletar
         jBAlterar.setEnabled(false); //Desabilita campo alterar
-        jTFIdEndereco.setEnabled(false); //Desabilita campo id endereço
-        jBcadAnimal.setEnabled(false);//Desabilita campo cadastrar Animal
         URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/icon-petshop-100.png"); //localiza o icone
         setIconImage(Toolkit.getDefaultToolkit().getImage(caminhoImagem));//define o icone
         preencherTabela();//Preenche tabela com os dados retornados do banco
@@ -97,7 +94,7 @@ public class ClientesTela extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jBGravar = new javax.swing.JButton();
         jBSair = new javax.swing.JButton();
-        jTFIdEndereco = new javax.swing.JTextField();
+        jTFEndereco = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -110,7 +107,6 @@ public class ClientesTela extends javax.swing.JFrame {
         jTFPesquisar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jBEndereco = new javax.swing.JButton();
-        jBcadAnimal = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,9 +137,9 @@ public class ClientesTela extends javax.swing.JFrame {
         getContentPane().add(jTFEmail);
         jTFEmail.setBounds(30, 160, 200, 22);
         getContentPane().add(jTFData);
-        jTFData.setBounds(190, 100, 120, 22);
+        jTFData.setBounds(30, 230, 120, 22);
         getContentPane().add(jTFTelefone);
-        jTFTelefone.setBounds(320, 100, 150, 22);
+        jTFTelefone.setBounds(210, 100, 150, 22);
 
         jLabel1.setText("Nome");
         getContentPane().add(jLabel1);
@@ -157,13 +153,13 @@ public class ClientesTela extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 140, 130, 16);
 
-        jLabel4.setText("Data Nascimento");
+        jLabel4.setText("Data_nascimento");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(190, 80, 110, 16);
+        jLabel4.setBounds(30, 210, 110, 16);
 
         jLabel5.setText("Telefone");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(320, 80, 60, 16);
+        jLabel5.setBounds(210, 80, 60, 16);
 
         jBGravar.setText("Gravar");
         jBGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,7 +168,7 @@ public class ClientesTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBGravar);
-        jBGravar.setBounds(120, 250, 80, 40);
+        jBGravar.setBounds(190, 250, 80, 40);
 
         jBSair.setText("Sair");
         jBSair.addActionListener(new java.awt.event.ActionListener() {
@@ -181,19 +177,19 @@ public class ClientesTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBSair);
-        jBSair.setBounds(600, 250, 80, 40);
+        jBSair.setBounds(560, 250, 80, 40);
 
-        jTFIdEndereco.addActionListener(new java.awt.event.ActionListener() {
+        jTFEndereco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTFIdEnderecoActionPerformed(evt);
+                jTFEnderecoActionPerformed(evt);
             }
         });
-        getContentPane().add(jTFIdEndereco);
-        jTFIdEndereco.setBounds(280, 160, 71, 22);
+        getContentPane().add(jTFEndereco);
+        jTFEndereco.setBounds(260, 160, 71, 22);
 
         jLabel6.setText("ID Endereço");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(280, 140, 70, 16);
+        jLabel6.setBounds(260, 140, 70, 16);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -226,7 +222,7 @@ public class ClientesTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBAlterar);
-        jBAlterar.setBounds(210, 250, 80, 40);
+        jBAlterar.setBounds(280, 250, 80, 40);
 
         jBDeletar.setText("Deletar");
         jBDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +231,7 @@ public class ClientesTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBDeletar);
-        jBDeletar.setBounds(300, 250, 80, 40);
+        jBDeletar.setBounds(370, 250, 80, 40);
 
         jLabel7.setText("Id Cliente");
         getContentPane().add(jLabel7);
@@ -256,7 +252,7 @@ public class ClientesTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBLimpar);
-        jBLimpar.setBounds(390, 250, 80, 40);
+        jBLimpar.setBounds(460, 250, 80, 40);
 
         jBPesquisar.setText("Pesquisar");
         jBPesquisar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -276,26 +272,8 @@ public class ClientesTela extends javax.swing.JFrame {
         jLabel8.setBounds(410, 10, 130, 16);
 
         jBEndereco.setText("Endereço");
-        jBEndereco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEnderecoActionPerformed(evt);
-            }
-        });
         getContentPane().add(jBEndereco);
-        jBEndereco.setBounds(370, 150, 95, 40);
-
-        jBcadAnimal.setText("<html><center>Cadastrar<br>Animal</center></html>");
-        jBcadAnimal.setToolTipText("animais");
-        jBcadAnimal.setActionCommand("Cadastrar Animais");
-        jBcadAnimal.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jBcadAnimal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBcadAnimalActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jBcadAnimal);
-        jBcadAnimal.setBounds(500, 250, 95, 40);
-        jBcadAnimal.getAccessibleContext().setAccessibleName("Cadastrar");
+        jBEndereco.setBounds(350, 150, 95, 40);
 
         setBounds(0, 0, 703, 621);
     }// </editor-fold>//GEN-END:initComponents
@@ -319,7 +297,7 @@ public class ClientesTela extends javax.swing.JFrame {
         String email = jTFEmail.getText().trim();
         String telefone = jTFTelefone.getText().trim();
         String dataNascimento = jTFData.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
+        String endereco = jTFEndereco.getText().trim();
         if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cpf) || "".equals(telefone) || "".equals(dataNascimento)) {
             JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
         } else {
@@ -336,9 +314,9 @@ public class ClientesTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jBGravarActionPerformed
 
-    private void jTFIdEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdEnderecoActionPerformed
+    private void jTFEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFEnderecoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTFIdEnderecoActionPerformed
+    }//GEN-LAST:event_jTFEnderecoActionPerformed
 
     //Ao clicar em um dos campos da tabela preenche os campos do programa
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
@@ -348,10 +326,9 @@ public class ClientesTela extends javax.swing.JFrame {
         jTFEmail.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
         jTFTelefone.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString());
         jTFData.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString());
-        jTFIdEndereco.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
+        jTFEndereco.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
         jBAlterar.setEnabled(true);
         jBDeletar.setEnabled(true);
-        jBcadAnimal.setEnabled(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTFIdClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFIdClienteActionPerformed
@@ -366,7 +343,7 @@ public class ClientesTela extends javax.swing.JFrame {
         String email = jTFEmail.getText().trim();
         String telefone = jTFTelefone.getText().trim();
         String dataNascimento = jTFData.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
+        String endereco = jTFEndereco.getText().trim();
 
         if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cpf) || "".equals(telefone) || "".equals(dataNascimento)) {
             JOptionPane.showMessageDialog(null, "E necessário preencher todos os campos para continuar");
@@ -393,7 +370,7 @@ public class ClientesTela extends javax.swing.JFrame {
         String email = jTFEmail.getText().trim();
         String telefone = jTFTelefone.getText().trim();
         String dataNascimento = jTFData.getText().trim();
-        String endereco = jTFIdEndereco.getText().trim();
+        String endereco = jTFEndereco.getText().trim();
 
         Clientes cliente = new Clientes();
         cliente.setId(id);
@@ -416,13 +393,12 @@ public class ClientesTela extends javax.swing.JFrame {
         jTFCpf.setText("");
         jTFData.setText("");
         jTFEmail.setText("");
-        jTFIdEndereco.setText("");
+        jTFEndereco.setText("");
         jTFTelefone.setText("");
         jTFPesquisar.setText("");
         preencherTabela();
         jBAlterar.setEnabled(false);
         jBDeletar.setEnabled(false);
-        jBcadAnimal.setEnabled(false);
     }//GEN-LAST:event_jBLimparActionPerformed
 
     //Preenche tabela realizando pesquisa com dados informados
@@ -438,24 +414,6 @@ public class ClientesTela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2MouseEntered
 
-    private void jBEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnderecoActionPerformed
-        EnderecosTela et = new EnderecosTela(this, true);
-        et.setVisible(true);
-        
-        jTFIdEndereco.setText(String.valueOf(et.getValorId()));
-    }//GEN-LAST:event_jBEnderecoActionPerformed
-
-    private void jBcadAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcadAnimalActionPerformed
-        try {
-            AnimaisTela at = new AnimaisTela();
-            at.setVisible(true);
-            at.setjCBIdTutor(Integer.parseInt(this.jTFIdCliente.getText().trim()));
-            at.setTitle("Cadastrar animais"); 
-        } catch (Exception ex) {
-            Logger.getLogger(ClientesTela.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_jBcadAnimalActionPerformed
-  
     /**
      * @param args the command line arguments
      */
@@ -504,7 +462,6 @@ public class ClientesTela extends javax.swing.JFrame {
     private javax.swing.JButton jBLimpar;
     private javax.swing.JButton jBPesquisar;
     private javax.swing.JButton jBSair;
-    private javax.swing.JButton jBcadAnimal;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -518,8 +475,8 @@ public class ClientesTela extends javax.swing.JFrame {
     private javax.swing.JTextField jTFCpf;
     private javax.swing.JTextField jTFData;
     private javax.swing.JTextField jTFEmail;
+    private javax.swing.JTextField jTFEndereco;
     private javax.swing.JTextField jTFIdCliente;
-    private javax.swing.JTextField jTFIdEndereco;
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFPesquisar;
     private javax.swing.JTextField jTFTelefone;

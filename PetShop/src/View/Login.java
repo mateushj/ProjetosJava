@@ -5,9 +5,11 @@
 package View;
 
 import Controller.FabricaConexao;
+import Model.JFrameComImagem;
 import Model.Usuarios;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +30,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setSize(500, 400);// Define resolução tela
+        setSize(390, 300);// Define resolução tela
         setDefaultCloseOperation(EXIT_ON_CLOSE);// Permite fechar com X
         setLocationRelativeTo(null);//Define a posição como centro da tela
         setTitle("Login");// Titulo da tela
@@ -39,17 +41,13 @@ public class Login extends javax.swing.JFrame {
     }
 
     //Redimedisiona e localiza define a imagem de imagem de fundo 
-    private void imagemFundo() {
-        try{
+    public void imagemFundo() {
         URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/meu-petshop-logo.png");
         ImageIcon imagem = new ImageIcon(caminhoImagem);
         Image img = imagem.getImage();
         Image imgScale = img.getScaledInstance(label.getWidth(), label.getHeight(), Image.SCALE_SMOOTH);
         ImageIcon imagemEscalada = new ImageIcon(imgScale);
         label.setIcon(imagemEscalada);
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Erro ao localizar imagem de fundo " + e.getMessage());
-        }
     }
 
     public void LoginUsuarios(Usuarios us) throws Exception {
@@ -99,45 +97,32 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jBLogar = new javax.swing.JButton();
         jTFUsuario = new javax.swing.JTextField();
         jPFSenha = new javax.swing.JPasswordField();
-        jLabel3 = new javax.swing.JLabel();
         label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(112, 58, 68));
-        jLabel4.setText("Login");
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 40, 120, 50);
-
-        jLabel1.setForeground(new java.awt.Color(112, 58, 68));
-        jLabel1.setText("Usuário");
+        jLabel1.setText("Usuario");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(10, 130, 120, 16);
+        jLabel1.setBounds(80, 40, 230, 16);
 
-        jLabel2.setForeground(new java.awt.Color(112, 58, 68));
         jLabel2.setText("Senha");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 190, 120, 16);
+        jLabel2.setBounds(80, 100, 220, 16);
 
-        jBLogar.setText("Entrar");
-        jBLogar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jBLogar.setDoubleBuffered(true);
-        jBLogar.setOpaque(true);
+        jBLogar.setText("Logar");
         jBLogar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLogarActionPerformed(evt);
             }
         });
         getContentPane().add(jBLogar);
-        jBLogar.setBounds(40, 260, 70, 40);
+        jBLogar.setBounds(140, 180, 80, 40);
 
         jTFUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -145,19 +130,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jTFUsuario);
-        jTFUsuario.setBounds(10, 150, 130, 22);
+        jTFUsuario.setBounds(80, 60, 230, 22);
         getContentPane().add(jPFSenha);
-        jPFSenha.setBounds(10, 210, 130, 22);
-
-        jLabel3.setBackground(new java.awt.Color(241, 242, 246));
-        jLabel3.setBorder(new javax.swing.border.MatteBorder(null));
-        jLabel3.setOpaque(true);
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, 0, 150, 360);
+        jPFSenha.setBounds(80, 120, 230, 22);
 
         label.setText("jLabel4");
         getContentPane().add(label);
-        label.setBounds(110, -10, 370, 370);
+        label.setBounds(0, -40, 370, 370);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -221,8 +200,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JButton jBLogar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPFSenha;
     private javax.swing.JTextField jTFUsuario;
     private javax.swing.JLabel label;
