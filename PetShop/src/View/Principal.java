@@ -67,6 +67,8 @@ public class Principal extends javax.swing.JFrame {
         jMenuItemAnimais = new javax.swing.JMenuItem();
         jMenuItemProdutos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImages(null);
@@ -149,7 +151,21 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenuCadastros);
 
-        jMenu2.setText("Edit");
+        jMenu2.setText("Serviços");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/project/venda-20.png"))); // NOI18N
+        jMenuItem1.setText("Vendas");
+        jMenu2.add(jMenuItem1);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/project/veterinarian-20.png"))); // NOI18N
+        jMenuItem2.setText("Consultas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -225,12 +241,22 @@ public class Principal extends javax.swing.JFrame {
         ProdutosTela p = null;
         try {
             p = new ProdutosTela();
+            p.setVisible(true);
+            setVisible(false);
         } catch (Exception ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        p.setVisible(true);
-        setVisible(false);
     }//GEN-LAST:event_jMenuItemProdutosActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        try {
+            ConsultasTela c = new ConsultasTela();
+            c.setVisible(true);
+            setVisible(false);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,6 +298,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAnimais;
     private javax.swing.JMenuItem jMenuItemClientes;
     private javax.swing.JMenuItem jMenuItemFornecedores;
