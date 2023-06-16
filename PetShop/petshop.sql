@@ -148,9 +148,9 @@ animal_id int not null,
 funcionario_id int not null,
 data_Consulta date not null,
 hora_Consulta time not null,
-retorno varchar(100) not null,
-prescricao varchar(100) not null,
-exame_id int not null
+retorno date,
+prescricao varchar(100),
+exame_id int
 );
 create table exames(
 id int primary key auto_increment,
@@ -158,6 +158,7 @@ descricao varchar(100) not null,
 data_Exame date not null,
 resultado_Exame varchar(100) not null
 );
+INSERT INTO exames(id,descricao,data_Exame,local_Exame) VALUES ('0', 'Nenhum exame anexado', '20230101', '0');
 
 ALTER TABLE clientes ADD CONSTRAINT clientesFK
 FOREIGN KEY(endereco_id)REFERENCES enderecos(id);
