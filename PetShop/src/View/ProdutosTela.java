@@ -76,7 +76,6 @@ public class ProdutosTela extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFDescricao = new javax.swing.JTextField();
-        jTFValidade = new javax.swing.JTextField();
         jTFId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTFQuantidade = new javax.swing.JTextField();
@@ -94,6 +93,7 @@ public class ProdutosTela extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jTFPrecoCompra = new javax.swing.JTextField();
         jTFPrecoVenda = new javax.swing.JTextField();
+        jTFValidade = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -117,12 +117,10 @@ public class ProdutosTela extends javax.swing.JFrame {
         });
         getContentPane().add(jTFDescricao);
         jTFDescricao.setBounds(30, 60, 190, 22);
-        getContentPane().add(jTFValidade);
-        jTFValidade.setBounds(30, 120, 140, 22);
         getContentPane().add(jTFId);
         jTFId.setBounds(350, 60, 30, 22);
 
-        jLabel4.setText("Qauntidade");
+        jLabel4.setText("Quantidade");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(250, 40, 70, 16);
         getContentPane().add(jTFQuantidade);
@@ -226,6 +224,14 @@ public class ProdutosTela extends javax.swing.JFrame {
         getContentPane().add(jTFPrecoVenda);
         jTFPrecoVenda.setBounds(300, 120, 80, 22);
 
+        try {
+            jTFValidade.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFValidade);
+        jTFValidade.setBounds(30, 120, 140, 22);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -238,7 +244,7 @@ public class ProdutosTela extends javax.swing.JFrame {
         jTFId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         jTFDescricao.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         jTFQuantidade.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
-        jTFValidade.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+        jTFValidade.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().replaceAll("-", ""));
         jTFPrecoCompra.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
         jTFPrecoVenda.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
         jBAlterar.setEnabled(true);
@@ -391,7 +397,7 @@ public class ProdutosTela extends javax.swing.JFrame {
     private javax.swing.JTextField jTFPrecoCompra;
     private javax.swing.JTextField jTFPrecoVenda;
     private javax.swing.JTextField jTFQuantidade;
-    private javax.swing.JTextField jTFValidade;
+    private javax.swing.JFormattedTextField jTFValidade;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

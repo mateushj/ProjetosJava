@@ -4,12 +4,8 @@
  */
 package View;
 
-import DAO.AnimaisDao;
-import DAO.ClienteDao;
 import DAO.ConsultasDao;
 import DAO.FuncionariosDao;
-import Model.Animais;
-import Model.Clientes;
 import Model.Consultas;
 import Model.Funcionarios;
 import java.awt.Toolkit;
@@ -23,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsultasTela extends javax.swing.JFrame {
-
+public static boolean telaAtiva = false;
     public ConsultasTela() throws Exception {
         initComponents();
         setSize(700, 580); // Define resolução tela
@@ -109,10 +105,8 @@ public class ConsultasTela extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTFIdAnimal = new javax.swing.JTextField();
-        jTFDataConsulta = new javax.swing.JTextField();
         jTFId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTFHoraConsulta = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
@@ -127,13 +121,16 @@ public class ConsultasTela extends javax.swing.JFrame {
         jCBNomeFuncionario = new javax.swing.JComboBox<>();
         jCBIdFuncionario = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jTFRetorno = new javax.swing.JTextField();
-        jTFPrescricao = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTFIdExame = new javax.swing.JTextField();
         jBSair1 = new javax.swing.JButton();
         jBExame = new javax.swing.JButton();
+        jTFRetorno = new javax.swing.JFormattedTextField();
+        jTFHoraConsulta = new javax.swing.JFormattedTextField();
+        jTFDataConsulta = new javax.swing.JFormattedTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jEPPrescricao = new javax.swing.JEditorPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -157,16 +154,12 @@ public class ConsultasTela extends javax.swing.JFrame {
         });
         getContentPane().add(jTFIdAnimal);
         jTFIdAnimal.setBounds(30, 60, 60, 22);
-        getContentPane().add(jTFDataConsulta);
-        jTFDataConsulta.setBounds(30, 120, 90, 22);
         getContentPane().add(jTFId);
         jTFId.setBounds(390, 60, 20, 22);
 
         jLabel4.setText("Hora Consulta");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(130, 100, 80, 16);
-        getContentPane().add(jTFHoraConsulta);
-        jTFHoraConsulta.setBounds(130, 120, 80, 22);
+        jLabel4.setBounds(130, 100, 90, 16);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -192,7 +185,7 @@ public class ConsultasTela extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 280, 668, 250);
+        jScrollPane1.setBounds(10, 320, 668, 210);
 
         jLabel5.setText("Retorno");
         getContentPane().add(jLabel5);
@@ -209,7 +202,7 @@ public class ConsultasTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBGravar);
-        jBGravar.setBounds(210, 230, 80, 40);
+        jBGravar.setBounds(210, 270, 80, 40);
 
         jBAlterar.setText("Alterar");
         jBAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +211,7 @@ public class ConsultasTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBAlterar);
-        jBAlterar.setBounds(300, 230, 80, 40);
+        jBAlterar.setBounds(300, 270, 80, 40);
 
         jBDeletar.setText("Deletar");
         jBDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +220,7 @@ public class ConsultasTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBDeletar);
-        jBDeletar.setBounds(390, 230, 80, 40);
+        jBDeletar.setBounds(390, 270, 80, 40);
 
         jBLimpar.setText("Limpar");
         jBLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +229,7 @@ public class ConsultasTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBLimpar);
-        jBLimpar.setBounds(480, 230, 80, 40);
+        jBLimpar.setBounds(480, 270, 80, 40);
 
         jLabel7.setText("Pesquisar");
         getContentPane().add(jLabel7);
@@ -277,10 +270,6 @@ public class ConsultasTela extends javax.swing.JFrame {
         jLabel8.setText("Nome Funcionario");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(100, 40, 170, 16);
-        getContentPane().add(jTFRetorno);
-        jTFRetorno.setBounds(220, 120, 80, 22);
-        getContentPane().add(jTFPrescricao);
-        jTFPrescricao.setBounds(30, 180, 170, 22);
 
         jLabel9.setText("Prescrição");
         getContentPane().add(jLabel9);
@@ -288,9 +277,9 @@ public class ConsultasTela extends javax.swing.JFrame {
 
         jLabel10.setText("Exame ID");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(250, 160, 60, 16);
+        jLabel10.setBounds(310, 100, 60, 16);
         getContentPane().add(jTFIdExame);
-        jTFIdExame.setBounds(250, 180, 50, 22);
+        jTFIdExame.setBounds(310, 120, 50, 22);
 
         jBSair1.setText("Sair");
         jBSair1.addActionListener(new java.awt.event.ActionListener() {
@@ -299,7 +288,7 @@ public class ConsultasTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBSair1);
-        jBSair1.setBounds(590, 230, 80, 40);
+        jBSair1.setBounds(590, 270, 80, 40);
 
         jBExame.setText("Exame");
         jBExame.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +297,37 @@ public class ConsultasTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBExame);
-        jBExame.setBounds(310, 170, 80, 40);
+        jBExame.setBounds(370, 110, 80, 40);
+
+        try {
+            jTFRetorno.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFRetorno);
+        jTFRetorno.setBounds(220, 120, 80, 22);
+
+        try {
+            jTFHoraConsulta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##:##:##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jTFHoraConsulta.setText("  :  :  ");
+        getContentPane().add(jTFHoraConsulta);
+        jTFHoraConsulta.setBounds(130, 120, 80, 22);
+
+        try {
+            jTFDataConsulta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFDataConsulta);
+        jTFDataConsulta.setBounds(30, 120, 90, 22);
+
+        jScrollPane3.setViewportView(jEPPrescricao);
+
+        getContentPane().add(jScrollPane3);
+        jScrollPane3.setBounds(30, 180, 270, 70);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -322,10 +341,10 @@ public class ConsultasTela extends javax.swing.JFrame {
         jTFId.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString());
         jTFIdAnimal.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         jCBIdFuncionario.setSelectedItem(Integer.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString()));
-        jTFDataConsulta.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
+        jTFDataConsulta.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().replaceAll("-", ""));
         jTFHoraConsulta.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
-        jTFRetorno.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString());
-        jTFPrescricao.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
+        jTFRetorno.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString().replaceAll("-", ""));
+        jEPPrescricao.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 6).toString());
         jTFIdExame.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 7).toString());
         
         jBAlterar.setEnabled(true);
@@ -340,7 +359,7 @@ public class ConsultasTela extends javax.swing.JFrame {
         jTFDataConsulta.setText("");
         jTFPesquisar.setText("");
         jTFRetorno.setText("");
-        jTFPrescricao.setText("");
+        jEPPrescricao.setText("");
         jTFIdExame.setText("");
         jCBIdFuncionario.setSelectedItem(null);
         preencherTabela();
@@ -354,7 +373,7 @@ public class ConsultasTela extends javax.swing.JFrame {
         String dataConsulta = jTFDataConsulta.getText().trim();
         String horaConsulta = jTFHoraConsulta.getText().trim();
         String retorno = jTFRetorno.getText().trim();
-        String prescricao = jTFPrescricao.getText().trim();
+        String prescricao = jEPPrescricao.getText().trim();
         String idExame = jTFIdExame.getText().trim();
         String idFuncionario = jCBIdFuncionario.getSelectedItem().toString().trim();
         
@@ -392,7 +411,7 @@ public class ConsultasTela extends javax.swing.JFrame {
         String dataConsulta = jTFDataConsulta.getText().trim();
         String horaConsulta = jTFHoraConsulta.getText().trim();
         String retorno = jTFRetorno.getText().trim();
-        String prescricao = jTFPrescricao.getText().trim();
+        String prescricao = jEPPrescricao.getText().trim();
         String idExame = jTFIdExame.getText().trim();
         String idFuncionario = jCBIdFuncionario.getSelectedItem().toString().trim();
         
@@ -440,14 +459,20 @@ public class ConsultasTela extends javax.swing.JFrame {
 
     private void jBSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSair1ActionPerformed
         this.dispose();
+        telaAtiva = false;
+        if("Consultas".equals(getTitle())){
         Principal p = new Principal();
         p.setVisible(true);
+        }
     }//GEN-LAST:event_jBSair1ActionPerformed
 
     private void jBExameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBExameActionPerformed
 
+    public void setjTFIdAnimal(String jTFIdAnimal) {
+        this.jTFIdAnimal.setText(jTFIdAnimal);
+    }
     /**
      * @param args the command line arguments
      */
@@ -494,6 +519,7 @@ public class ConsultasTela extends javax.swing.JFrame {
     private javax.swing.JButton jBSair1;
     private javax.swing.JComboBox<String> jCBIdFuncionario;
     private javax.swing.JComboBox<String> jCBNomeFuncionario;
+    private javax.swing.JEditorPane jEPPrescricao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -505,14 +531,14 @@ public class ConsultasTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTFDataConsulta;
-    private javax.swing.JTextField jTFHoraConsulta;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JFormattedTextField jTFDataConsulta;
+    private javax.swing.JFormattedTextField jTFHoraConsulta;
     private javax.swing.JTextField jTFId;
     private javax.swing.JTextField jTFIdAnimal;
     private javax.swing.JTextField jTFIdExame;
     private javax.swing.JTextField jTFPesquisar;
-    private javax.swing.JTextField jTFPrescricao;
-    private javax.swing.JTextField jTFRetorno;
+    private javax.swing.JFormattedTextField jTFRetorno;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
