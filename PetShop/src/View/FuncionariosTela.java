@@ -25,6 +25,7 @@ public class FuncionariosTela extends javax.swing.JFrame {
         jTFId.setEnabled(false); //Desabilita campo Id
         jBDeletar.setEnabled(false);//Desabilita campo deletar
         jBAlterar.setEnabled(false); //Desabilita campo alterar
+        jTFEndereçoId.setEnabled(false); //Desabilita campo alterar
         URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/icon-petshop-100.png"); //localiza o icone
         setIconImage(Toolkit.getDefaultToolkit().getImage(caminhoImagem));//define o icone
         preencherTabela();//Preenche tabela com os dados retornados do banco
@@ -82,10 +83,7 @@ public class FuncionariosTela extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFNome = new javax.swing.JTextField();
-        jTFCpf = new javax.swing.JTextField();
         jTFEmail = new javax.swing.JTextField();
-        jTFData = new javax.swing.JTextField();
-        jTFTelefone = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -112,6 +110,9 @@ public class FuncionariosTela extends javax.swing.JFrame {
         jTFEndereçoId = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jBEndereco = new javax.swing.JButton();
+        jTFCpf = new javax.swing.JFormattedTextField();
+        jTFTelefone = new javax.swing.JFormattedTextField();
+        jTFData = new javax.swing.JFormattedTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,14 +138,8 @@ public class FuncionariosTela extends javax.swing.JFrame {
         });
         getContentPane().add(jTFNome);
         jTFNome.setBounds(30, 30, 210, 22);
-        getContentPane().add(jTFCpf);
-        jTFCpf.setBounds(30, 90, 150, 22);
         getContentPane().add(jTFEmail);
         jTFEmail.setBounds(30, 150, 200, 22);
-        getContentPane().add(jTFData);
-        jTFData.setBounds(30, 210, 120, 22);
-        getContentPane().add(jTFTelefone);
-        jTFTelefone.setBounds(250, 150, 150, 22);
 
         jLabel1.setText("Nome");
         getContentPane().add(jLabel1);
@@ -158,7 +153,7 @@ public class FuncionariosTela extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(30, 130, 130, 16);
 
-        jLabel4.setText("Data_nascimento");
+        jLabel4.setText("Data Nascimento");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(30, 190, 110, 16);
 
@@ -309,8 +304,37 @@ public class FuncionariosTela extends javax.swing.JFrame {
         jLabel11.setBounds(420, 130, 70, 16);
 
         jBEndereco.setText("Endereço");
+        jBEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEnderecoActionPerformed(evt);
+            }
+        });
         getContentPane().add(jBEndereco);
         jBEndereco.setBounds(510, 140, 95, 40);
+
+        try {
+            jTFCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFCpf);
+        jTFCpf.setBounds(30, 90, 160, 22);
+
+        try {
+            jTFTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFTelefone);
+        jTFTelefone.setBounds(250, 150, 150, 22);
+
+        try {
+            jTFData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFData);
+        jTFData.setBounds(30, 210, 120, 22);
 
         setBounds(0, 0, 697, 594);
     }// </editor-fold>//GEN-END:initComponents
@@ -330,10 +354,10 @@ public class FuncionariosTela extends javax.swing.JFrame {
     private void jBGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGravarActionPerformed
 
         String nome = jTFNome.getText().trim();
-        String cpf = jTFCpf.getText().trim();
+        String cpf = jTFCpf.getText().replaceAll("\\.", "").replaceAll("-", "").trim();
         String rg = jTFRg.getText().trim();
         String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
+        String telefone = jTFTelefone.getText().replaceAll("\\(", "").replaceAll("\\) ", "").replaceAll("-", "").trim();
         String dataNascimento = jTFData.getText().trim();
         String cargo = jTFCargo.getText().trim();
         String enderecoId = jTFEndereçoId.getText().trim();
@@ -370,7 +394,7 @@ public class FuncionariosTela extends javax.swing.JFrame {
         jTFRg.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
         jTFEmail.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString());
         jTFTelefone.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString());
-        jTFData.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
+        jTFData.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString().replaceAll("-", ""));
         jTFCargo.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 7).toString());
         jTFSalario.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 8).toString());
         jTFEndereçoId.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 9).toString());
@@ -386,10 +410,10 @@ public class FuncionariosTela extends javax.swing.JFrame {
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
         int Id = Integer.parseInt(jTFId.getText().trim());
         String nome = jTFNome.getText().trim();
-        String cpf = jTFCpf.getText().trim();
+        String cpf = jTFCpf.getText().replaceAll("\\.", "").replaceAll("-", "").trim();
         String rg = jTFRg.getText().trim();
         String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
+        String telefone = jTFTelefone.getText().replaceAll("\\(", "").replaceAll("\\) ", "").replaceAll("-", "").trim();
         String dataNascimento = jTFData.getText().trim();
         String cargo = jTFCargo.getText().trim();
         String enderecoId = jTFEndereçoId.getText().trim();
@@ -459,6 +483,13 @@ public class FuncionariosTela extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable2MouseEntered
 
+    private void jBEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEnderecoActionPerformed
+        EnderecosTela et = new EnderecosTela(this, true);
+        et.setVisible(true);
+        
+        jTFEndereçoId.setText(String.valueOf(et.getValorId()));
+    }//GEN-LAST:event_jBEnderecoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -523,8 +554,8 @@ public class FuncionariosTela extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFCargo;
-    private javax.swing.JTextField jTFCpf;
-    private javax.swing.JTextField jTFData;
+    private javax.swing.JFormattedTextField jTFCpf;
+    private javax.swing.JFormattedTextField jTFData;
     private javax.swing.JTextField jTFEmail;
     private javax.swing.JTextField jTFEndereçoId;
     private javax.swing.JTextField jTFId;
@@ -532,7 +563,7 @@ public class FuncionariosTela extends javax.swing.JFrame {
     private javax.swing.JTextField jTFPesquisar;
     private javax.swing.JTextField jTFRg;
     private javax.swing.JTextField jTFSalario;
-    private javax.swing.JTextField jTFTelefone;
+    private javax.swing.JFormattedTextField jTFTelefone;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables

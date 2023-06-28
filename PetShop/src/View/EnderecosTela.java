@@ -20,6 +20,8 @@ public class EnderecosTela extends javax.swing.JDialog {
 
     /**
      * Creates new form NewJDialog
+     * @param parent
+     * @param modal
      */
     public EnderecosTela(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -90,7 +92,6 @@ private int valorId;
     private void initComponents() {
 
         jTFLogradouro = new javax.swing.JTextField();
-        jTFCep = new javax.swing.JTextField();
         jTFBairro = new javax.swing.JTextField();
         jTFEstado = new javax.swing.JTextField();
         jTFCidade = new javax.swing.JTextField();
@@ -116,6 +117,7 @@ private int valorId;
         jTFComplemento = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jBSelecionar = new javax.swing.JButton();
+        jTFCep = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -127,8 +129,6 @@ private int valorId;
         });
         getContentPane().add(jTFLogradouro);
         jTFLogradouro.setBounds(30, 40, 210, 22);
-        getContentPane().add(jTFCep);
-        jTFCep.setBounds(30, 160, 130, 22);
         getContentPane().add(jTFBairro);
         jTFBairro.setBounds(30, 100, 140, 22);
         getContentPane().add(jTFEstado);
@@ -289,6 +289,14 @@ private int valorId;
         getContentPane().add(jBSelecionar);
         jBSelecionar.setBounds(80, 250, 95, 40);
 
+        try {
+            jTFCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFCep);
+        jTFCep.setBounds(30, 160, 130, 22);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -299,7 +307,7 @@ private int valorId;
     private void jBGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGravarActionPerformed
 
         String logradouro = jTFLogradouro.getText().trim();
-        String cep = jTFCep.getText().trim();
+        String cep = jTFCep.getText().replaceAll("-", "").trim();
         String bairro = jTFBairro.getText().trim();
         String cidade = jTFCidade.getText().trim();
         String estado = jTFEstado.getText().trim();
@@ -356,7 +364,7 @@ private int valorId;
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
         int Id = Integer.parseInt(jTFId.getText().trim());
         String logradouro = jTFLogradouro.getText().trim();
-        String cep = jTFCep.getText().trim();
+        String cep = jTFCep.getText().replaceAll("-", "").trim();
         String bairro = jTFBairro.getText().trim();
         String cidade = jTFCidade.getText().trim();
         String estado = jTFEstado.getText().trim();
@@ -482,7 +490,7 @@ private int valorId;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFBairro;
-    private javax.swing.JTextField jTFCep;
+    private javax.swing.JFormattedTextField jTFCep;
     private javax.swing.JTextField jTFCidade;
     private javax.swing.JTextField jTFComplemento;
     private javax.swing.JTextField jTFEstado;

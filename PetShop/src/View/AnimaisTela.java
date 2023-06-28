@@ -29,6 +29,7 @@ public class AnimaisTela extends javax.swing.JFrame {
      *
      * @throws java.lang.Exception
      */
+     public static boolean telaAtiva = false;
     public AnimaisTela() throws Exception {
         initComponents();
         setSize(700, 580); // Define resolução tela
@@ -40,6 +41,7 @@ public class AnimaisTela extends javax.swing.JFrame {
         jBDeletar.setEnabled(false);//Desabilita campo deletar
         jBAlterar.setEnabled(false); //Desabilita campo alterar
         jCBNomeTutor.setEnabled(false);//Desabilita campo nome tutor
+        jBConsulta.setEnabled(false);//Desabilita campo consulta
         URL caminhoImagem = this.getClass().getClassLoader().getResource("./images/project/icon-petshop-100.png"); //localiza o icone
         setIconImage(Toolkit.getDefaultToolkit().getImage(caminhoImagem));//define o icone
         preencherTabela(); //Preenche tabela com os dados retornados do banco
@@ -115,7 +117,6 @@ public class AnimaisTela extends javax.swing.JFrame {
         jTFRaca = new javax.swing.JTextField();
         jTFId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTFNascimento = new javax.swing.JTextField();
         jBSair = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -132,7 +133,8 @@ public class AnimaisTela extends javax.swing.JFrame {
         jCBNomeTutor = new javax.swing.JComboBox<>();
         jCBIdTutor = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jLNomeTutor = new javax.swing.JLabel();
+        jTFNascimento = new javax.swing.JFormattedTextField();
+        jBConsulta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -164,8 +166,6 @@ public class AnimaisTela extends javax.swing.JFrame {
         jLabel4.setText("Data Nascimento");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(190, 40, 110, 16);
-        getContentPane().add(jTFNascimento);
-        jTFNascimento.setBounds(190, 60, 90, 22);
 
         jBSair.setText("Sair");
         jBSair.addActionListener(new java.awt.event.ActionListener() {
@@ -209,7 +209,7 @@ public class AnimaisTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBGravar);
-        jBGravar.setBounds(210, 180, 80, 40);
+        jBGravar.setBounds(110, 180, 80, 40);
 
         jBAlterar.setText("Alterar");
         jBAlterar.addActionListener(new java.awt.event.ActionListener() {
@@ -218,7 +218,7 @@ public class AnimaisTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBAlterar);
-        jBAlterar.setBounds(300, 180, 80, 40);
+        jBAlterar.setBounds(200, 180, 80, 40);
 
         jBDeletar.setText("Deletar");
         jBDeletar.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +227,7 @@ public class AnimaisTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBDeletar);
-        jBDeletar.setBounds(390, 180, 80, 40);
+        jBDeletar.setBounds(290, 180, 80, 40);
 
         jBLimpar.setText("Limpar");
         jBLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +236,7 @@ public class AnimaisTela extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jBLimpar);
-        jBLimpar.setBounds(480, 180, 80, 40);
+        jBLimpar.setBounds(380, 180, 80, 40);
 
         jLabel7.setText("Pesquisar");
         getContentPane().add(jLabel7);
@@ -281,8 +281,26 @@ public class AnimaisTela extends javax.swing.JFrame {
         jLabel8.setText("Nome Tutor");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(240, 100, 170, 16);
-        getContentPane().add(jLNomeTutor);
-        jLNomeTutor.setBounds(500, 120, 150, 20);
+
+        try {
+            jTFNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFNascimento);
+        jTFNascimento.setBounds(190, 60, 90, 22);
+
+        jBConsulta.setText("<html><center>Gerar<br>Consulta</center></html>");
+        jBConsulta.setToolTipText("animais");
+        jBConsulta.setActionCommand("Cadastrar Animais");
+        jBConsulta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jBConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBConsultaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jBConsulta);
+        jBConsulta.setBounds(500, 180, 80, 40);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -297,10 +315,11 @@ public class AnimaisTela extends javax.swing.JFrame {
         jTFNome.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 1).toString());
         jTFRaca.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 2).toString());
         jCBSexo.setSelectedItem(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString());
-        jTFNascimento.setText(jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString());
+        jTFNascimento.setText((jTable1.getValueAt(jTable1.getSelectedRow(), 4).toString().replaceAll("-", "")));
         jCBIdTutor.setSelectedItem(Integer.valueOf(jTable1.getValueAt(jTable1.getSelectedRow(), 5).toString()));
         jBAlterar.setEnabled(true);
         jBDeletar.setEnabled(true);
+        jBConsulta.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     //Limpa todos os campos do programa
@@ -321,6 +340,7 @@ public class AnimaisTela extends javax.swing.JFrame {
     //fecha a tela
     private void jBSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSairActionPerformed
         this.dispose();
+        telaAtiva = false;
         if("Cadastrar Animais".equals(getTitle())){
         Principal p = new Principal();
         p.setVisible(true);
@@ -409,6 +429,23 @@ public class AnimaisTela extends javax.swing.JFrame {
         preencherTabela();
     }//GEN-LAST:event_jBDeletarActionPerformed
 
+    private void jBConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBConsultaActionPerformed
+        try {
+            if (!ConsultasTela.telaAtiva) {
+            ConsultasTela ct = new ConsultasTela();
+            ct.setVisible(true);
+            ct.setjTFIdAnimal(jTFId.getText().trim());
+            ct.setTitle("consultas");
+            ConsultasTela.telaAtiva = true;
+            }
+            else{
+            JOptionPane.showMessageDialog(null, "A tela que esta tentando acessar já está aberta","Alerta",JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(ClientesTela.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jBConsultaActionPerformed
+
     public void setjCBIdTutor(int jCBIdTutor) {
         this.jCBIdTutor.setSelectedItem(jCBIdTutor);
     }
@@ -450,6 +487,7 @@ public class AnimaisTela extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAlterar;
+    private javax.swing.JButton jBConsulta;
     private javax.swing.JButton jBDeletar;
     private javax.swing.JButton jBGravar;
     private javax.swing.JButton jBLimpar;
@@ -458,7 +496,6 @@ public class AnimaisTela extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jCBIdTutor;
     private javax.swing.JComboBox<String> jCBNomeTutor;
     private javax.swing.JComboBox<String> jCBSexo;
-    private javax.swing.JLabel jLNomeTutor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -469,7 +506,7 @@ public class AnimaisTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFId;
-    private javax.swing.JTextField jTFNascimento;
+    private javax.swing.JFormattedTextField jTFNascimento;
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFPesquisar;
     private javax.swing.JTextField jTFRaca;

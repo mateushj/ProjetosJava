@@ -86,10 +86,7 @@ public class ClientesTela extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFNome = new javax.swing.JTextField();
-        jTFCpf = new javax.swing.JTextField();
         jTFEmail = new javax.swing.JTextField();
-        jTFData = new javax.swing.JTextField();
-        jTFTelefone = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -111,6 +108,9 @@ public class ClientesTela extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jBEndereco = new javax.swing.JButton();
         jBcadAnimal = new javax.swing.JButton();
+        jTFData = new javax.swing.JFormattedTextField();
+        jTFTelefone = new javax.swing.JFormattedTextField();
+        jTFCpf = new javax.swing.JFormattedTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,14 +136,8 @@ public class ClientesTela extends javax.swing.JFrame {
         });
         getContentPane().add(jTFNome);
         jTFNome.setBounds(30, 40, 210, 22);
-        getContentPane().add(jTFCpf);
-        jTFCpf.setBounds(30, 100, 150, 22);
         getContentPane().add(jTFEmail);
         jTFEmail.setBounds(30, 160, 200, 22);
-        getContentPane().add(jTFData);
-        jTFData.setBounds(190, 100, 120, 22);
-        getContentPane().add(jTFTelefone);
-        jTFTelefone.setBounds(320, 100, 150, 22);
 
         jLabel1.setText("Nome");
         getContentPane().add(jLabel1);
@@ -297,6 +291,30 @@ public class ClientesTela extends javax.swing.JFrame {
         jBcadAnimal.setBounds(500, 250, 95, 40);
         jBcadAnimal.getAccessibleContext().setAccessibleName("Cadastrar");
 
+        try {
+            jTFData.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####/##/##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFData);
+        jTFData.setBounds(190, 100, 120, 22);
+
+        try {
+            jTFTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFTelefone);
+        jTFTelefone.setBounds(320, 100, 150, 22);
+
+        try {
+            jTFCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFCpf);
+        jTFCpf.setBounds(30, 100, 150, 22);
+
         setBounds(0, 0, 703, 621);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -315,9 +333,9 @@ public class ClientesTela extends javax.swing.JFrame {
     private void jBGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGravarActionPerformed
 
         String nome = jTFNome.getText().trim();
-        String cpf = jTFCpf.getText().trim();
+        String cpf = jTFCpf.getText().replaceAll("\\.", "").replaceAll("-", "");
         String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
+        String telefone = jTFTelefone.getText().replaceAll("\\(", "").replaceAll("\\) ", "").replaceAll("-", "").trim();
         String dataNascimento = jTFData.getText().trim();
         String endereco = jTFIdEndereco.getText().trim();
         if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cpf) || "".equals(telefone) || "".equals(dataNascimento)) {
@@ -347,7 +365,7 @@ public class ClientesTela extends javax.swing.JFrame {
         jTFCpf.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 2).toString());
         jTFEmail.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 3).toString());
         jTFTelefone.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 4).toString());
-        jTFData.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString());
+        jTFData.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 5).toString().replaceAll("-", ""));
         jTFIdEndereco.setText(jTable2.getValueAt(jTable2.getSelectedRow(), 6).toString());
         jBAlterar.setEnabled(true);
         jBDeletar.setEnabled(true);
@@ -362,9 +380,9 @@ public class ClientesTela extends javax.swing.JFrame {
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
         int Id = Integer.parseInt(jTFIdCliente.getText().trim());
         String nome = jTFNome.getText().trim();
-        String cpf = jTFCpf.getText().trim();
+        String cpf = jTFCpf.getText().replaceAll("\\.", "").replaceAll("-", "");
         String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
+        String telefone = jTFTelefone.getText().replaceAll("\\(", "").replaceAll("\\) ", "").replaceAll("-", "").trim();
         String dataNascimento = jTFData.getText().trim();
         String endereco = jTFIdEndereco.getText().trim();
 
@@ -446,11 +464,18 @@ public class ClientesTela extends javax.swing.JFrame {
     }//GEN-LAST:event_jBEnderecoActionPerformed
 
     private void jBcadAnimalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBcadAnimalActionPerformed
+        AnimaisTela at = null;
         try {
-            AnimaisTela at = new AnimaisTela();
+            if (!AnimaisTela.telaAtiva) {
+            at = new AnimaisTela();
             at.setVisible(true);
             at.setjCBIdTutor(Integer.parseInt(this.jTFIdCliente.getText().trim()));
-            at.setTitle("Cadastrar animais"); 
+            at.setTitle("Cadastrar animais");
+            
+        AnimaisTela.telaAtiva = true; // Defina a variável TelaAtiva como true para indicar que o JFrame já foi instanciado
+                    }else{
+            JOptionPane.showMessageDialog(null, "A tela que esta tentando acessar já está aberta","Alerta",JOptionPane.ERROR_MESSAGE);
+        }
         } catch (Exception ex) {
             Logger.getLogger(ClientesTela.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -515,14 +540,14 @@ public class ClientesTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTFCpf;
-    private javax.swing.JTextField jTFData;
+    private javax.swing.JFormattedTextField jTFCpf;
+    private javax.swing.JFormattedTextField jTFData;
     private javax.swing.JTextField jTFEmail;
     private javax.swing.JTextField jTFIdCliente;
     private javax.swing.JTextField jTFIdEndereco;
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFPesquisar;
-    private javax.swing.JTextField jTFTelefone;
+    private javax.swing.JFormattedTextField jTFTelefone;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables

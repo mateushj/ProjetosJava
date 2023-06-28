@@ -77,10 +77,8 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jTFNome = new javax.swing.JTextField();
-        jTFCnpj = new javax.swing.JTextField();
         jTFEmail = new javax.swing.JTextField();
         jTFInscEstadual = new javax.swing.JTextField();
-        jTFTelefone = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -101,6 +99,8 @@ public class FornecedoresTela extends javax.swing.JFrame {
         jTFPesquisar = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jBEndereco = new javax.swing.JButton();
+        jTFTelefone = new javax.swing.JFormattedTextField();
+        jTFCnpj = new javax.swing.JFormattedTextField();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -126,14 +126,10 @@ public class FornecedoresTela extends javax.swing.JFrame {
         });
         getContentPane().add(jTFNome);
         jTFNome.setBounds(30, 40, 210, 22);
-        getContentPane().add(jTFCnpj);
-        jTFCnpj.setBounds(30, 100, 150, 22);
         getContentPane().add(jTFEmail);
         jTFEmail.setBounds(30, 160, 200, 22);
         getContentPane().add(jTFInscEstadual);
         jTFInscEstadual.setBounds(210, 100, 120, 22);
-        getContentPane().add(jTFTelefone);
-        jTFTelefone.setBounds(30, 220, 150, 22);
 
         jLabel1.setText("Nome");
         getContentPane().add(jLabel1);
@@ -274,6 +270,22 @@ public class FornecedoresTela extends javax.swing.JFrame {
         getContentPane().add(jBEndereco);
         jBEndereco.setBounds(350, 150, 95, 40);
 
+        try {
+            jTFTelefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFTelefone);
+        jTFTelefone.setBounds(30, 220, 150, 22);
+
+        try {
+            jTFCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        getContentPane().add(jTFCnpj);
+        jTFCnpj.setBounds(30, 100, 150, 22);
+
         setBounds(0, 0, 703, 621);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -292,9 +304,9 @@ public class FornecedoresTela extends javax.swing.JFrame {
     private void jBGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGravarActionPerformed
 
         String nome = jTFNome.getText().trim();
-        String cnpj = jTFCnpj.getText().trim();
+        String cnpj = jTFCnpj.getText().replaceAll("\\.", "").replaceAll("/", "").replaceAll("-", "").trim();
         String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
+        String telefone = jTFTelefone.getText().replaceAll("\\(", "").replaceAll("\\) ", "").replaceAll("-", "").trim();
         String InscEstadual = jTFInscEstadual.getText().trim();
         String endereco = jTFIdEndereco.getText().trim();
         if ("".equals(endereco) || "".equals(email) || "".equals(nome) || "".equals(cnpj) || "".equals(telefone) || "".equals(InscEstadual)) {
@@ -338,9 +350,9 @@ public class FornecedoresTela extends javax.swing.JFrame {
     private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
         int Id = Integer.parseInt(jTFId.getText().trim());
         String nome = jTFNome.getText().trim();
-        String cnpj = jTFCnpj.getText().trim();
+        String cnpj = jTFCnpj.getText().replaceAll("\\.", "").replaceAll("/", "").replaceAll("-", "").trim();
         String email = jTFEmail.getText().trim();
-        String telefone = jTFTelefone.getText().trim();
+        String telefone = jTFTelefone.getText().replaceAll("\\(", "").replaceAll("\\) ", "").replaceAll("-", "").trim();
         String InscEstadual = jTFInscEstadual.getText().trim();
         String endereco = jTFIdEndereco.getText().trim();
 
@@ -468,14 +480,14 @@ public class FornecedoresTela extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTFCnpj;
+    private javax.swing.JFormattedTextField jTFCnpj;
     private javax.swing.JTextField jTFEmail;
     private javax.swing.JTextField jTFId;
     private javax.swing.JTextField jTFIdEndereco;
     private javax.swing.JTextField jTFInscEstadual;
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFPesquisar;
-    private javax.swing.JTextField jTFTelefone;
+    private javax.swing.JFormattedTextField jTFTelefone;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables

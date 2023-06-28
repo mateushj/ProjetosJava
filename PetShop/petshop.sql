@@ -149,7 +149,7 @@ funcionario_id int not null,
 data_Consulta date not null,
 hora_Consulta time not null,
 retorno date,
-prescricao varchar(100),
+prescricao varchar(500),
 exame_id int
 );
 create table exames(
